@@ -1,0 +1,59 @@
+{
+  "name": "@cosmjs/faucet",
+  "version": "0.24.0-alpha.17",
+  "description": "The faucet",
+  "contributors": [
+    "Ethan Frey <ethanfrey@users.noreply.github.com>",
+    "Simon Warta <webmaster128@users.noreply.github.com>"
+  ],
+  "license": "Apache-2.0",
+  "bin": {
+    "cosmos-faucet": "bin/cosmos-faucet"
+  },
+  "files": [
+    "build/",
+    "types/",
+    "*.md",
+    "!*.spec.*",
+    "!**/testdata/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CosmWasm/cosmjs/tree/master/packages/faucet"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "dev-start": "yarn start-dev",
+    "format": "prettier --write --loglevel warn \"./src/**/*.ts\"",
+    "format-text": "prettier --write --prose-wrap always --print-width 80 \"./*.md\"",
+    "lint": "eslint --max-warnings 0 \"**/*.{js,ts}\"",
+    "lint-fix": "eslint --max-warnings 0 \"**/*.{js,ts}\" --fix",
+    "prebuild": "shx rm -rf ./build",
+    "build": "tsc",
+    "build-or-skip": "[ -n \"$SKIP_BUILD\" ] || yarn build",
+    "test-node": "node jasmine-testrunner.js",
+    "test": "yarn build-or-skip && yarn test-node",
+    "coverage": "nyc --reporter=text --reporter=lcov yarn test --quiet",
+    "start-dev": "FAUCET_ADDRESS_PREFIX=wasm FAUCET_CREDIT_AMOUNT_UCOSM=10000000 FAUCET_CREDIT_AMOUNT_USTAKE=100000 FAUCET_CONCURRENCY=3 FAUCET_MNEMONIC=\"economy stock theory fatal elder harbor betray wasp final emotion task crumble siren bottom lizard educate guess current outdoor pair theory focus wife stone\" ./bin/cosmos-faucet start \"http://localhost:26659\"",
+    "start-coralnet": "FAUCET_ADDRESS_PREFIX=coral FAUCET_TOKENS=\"ushell,ureef\" FAUCET_CREDIT_AMOUNT_USHELL=10000000 FAUCET_CREDIT_AMOUNT_UREEF=2000000 FAUCET_CONCURRENCY=3 FAUCET_MNEMONIC=\"economy stock theory fatal elder harbor betray wasp final emotion task crumble siren bottom lizard educate guess current outdoor pair theory focus wife stone\" ./bin/cosmos-faucet start \"https://lcd.coralnet.cosmwasm.com\""
+  },
+  "dependencies": {
+    "@cosmjs/crypto": "^0.24.0-alpha.17",
+    "@cosmjs/encoding": "^0.24.0-alpha.17",
+    "@cosmjs/launchpad": "^0.24.0-alpha.17",
+    "@cosmjs/math": "^0.24.0-alpha.17",
+    "@cosmjs/proto-signing": "^0.24.0-alpha.17",
+    "@cosmjs/stargate": "^0.24.0-alpha.17",
+    "@cosmjs/utils": "^0.24.0-alpha.17",
+    "@koa/cors": "^3.0.0",
+    "koa": "^2.11.0",
+    "koa-bodyparser": "^4.2.1"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.11.0",
+    "@types/koa-bodyparser": "^4.3.0",
+    "@types/koa__cors": "^3.0.1"
+  }
+}

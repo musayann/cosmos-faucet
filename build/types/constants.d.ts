@@ -1,0 +1,11 @@
+import { CosmosFeeTable, GasLimits, GasPrice } from "@cosmjs/launchpad";
+import { TokenConfiguration } from "./tokenmanager";
+export declare const binaryName = "cosmos-faucet";
+export declare const memo: string | undefined;
+export declare const gasPrice: GasPrice;
+export declare const gasLimits: GasLimits<CosmosFeeTable>;
+export declare const concurrency: number;
+export declare const port: number;
+export declare const mnemonic: string | undefined;
+export declare const addressPrefix: string;
+export declare const tokenConfig: TokenConfiguration;
